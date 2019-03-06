@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.salessystem.dao.UserDao">
+    <select id="find" resultType="User">
+        select id,user_name AS userName,password ,user_role AS userRole
+        from user
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="userName!=null">
+                and user_name=#{userName}
+            </if>
+            <if test="password!=null">
+                and password=#{password}
+            </if>
+            <if test="userRole!=null">
+                user_role=#{user_role}
+            </if>
+        </where>
+    </select>
+</mapper>

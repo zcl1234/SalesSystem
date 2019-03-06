@@ -2,10 +2,14 @@
  * Created by zhangchenlin on 19/2/16.
  */
 angular.module('login', [])
-    .controller('loginCtrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('loginCtrl', ['$scope', '$location', '$http', '$rootScope', function ($scope, $location, $http, $rootScope) {
         $scope.login = function () {
-            $location.search('userName', 'seller');
-            $location.search('password', 'relles');
-            $location.path('/seller');
+            $http.get('/login?username=' + $scope.username + '&password=' + hex_md5($scope.password))
+                .success(function (data) {
+                    $rootScope.username=data.result.userName;
+                    $rootScope.user_role=data.result.userRole;
+
+                    $location.path('seller');
+                });
         };
     }]);

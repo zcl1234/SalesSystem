@@ -8,8 +8,6 @@ var modules = [
     'seller'
 ];
 
-var test=false;
-
 var app = angular.module('SalesSystem', modules, function () {
 
 });

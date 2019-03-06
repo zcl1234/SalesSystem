@@ -7,14 +7,47 @@
     <link rel="stylesheet" href="resources/css/bootstrap.css"/>
 </head>
 <body ng-app="SalesSystem">
-<!--<div id="main_nav" class="n-head" ng-show="test">-->
-    <!--<div class="g-doc f-cb">-->
-        <!--<div class="user">-->
-            <!--请-->
-            <!--<a href="#/login">[登录]</a>-->
+<div id="main_nav" class="n-head" ng-if="username==undefined||username==''">
+    <div class="g-doc f-cb">
+        <div id="login" class="user">
+            请
+            <a href="#/login">[登录]</a>
+        </div>
+
+        <!--<div id="seller" class="user" ng-if="username=='seller'">-->
+        <!--卖家你好，<span class="name">{{username}}</span>！<a href="/logout">[退出]</a>-->
         <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+        <!--<ul class="nav" ng-if="username=='seller'">-->
+        <!--<li><a href="/">首页</a></li>-->
+        <!--<li><a href="/public">发布</a></li>-->
+        <!--</ul>-->
+    </div>
+</div>
+<div id="seller" class="n-head" ng-if="user_role=='SELLER'">
+    <div class="g-doc f-cb">
+        <div class="user">
+            卖家你好，<span class="name">{{username}}</span>！<a href="/logout">[退出]</a>
+        </div>
+        <ul class="nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="#/public">发布</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="buyer" class="n-head" ng-if="user_role=='BUYER'">
+    <div class="g-doc f-cb">
+        <div class="user">
+            买家你好，<span class="name">{{username}}</span>！<a href="/logout">[退出]</a>
+        </div>
+        <ul class="nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="/account">账务</a></li>
+            <li><a href="/settleAccount">购物车</a></li>
+        </ul>
+    </div>
+</div>
+
 <div ng-view></div>
 </body>
 <!--Third Party-->

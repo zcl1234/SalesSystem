@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="salessystem.war">
+    <root id="archive" name="salessystem-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="SalesSystem:war exploded" />
     </root>
   </artifact>

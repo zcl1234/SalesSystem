@@ -1,29 +1,19 @@
-<div ng-controller="loginCtrl">
-    <div id="main_nav" class="n-head">
-        <div class="g-doc f-cb">
-            <div class="user">
-                请
-                <a href="#/login">[登录]</a>
-            </div>
+<div class="m-form m-form-ht n-login" id="loginForm">
+    <div class="fmitem">
+        <label class="fmlab">用户名：</label>
+        <div class="fmipt">
+            <input type="text" class="u-ipt" ng-model="username" autofocus="">
         </div>
     </div>
-    <div class="m-form m-form-ht n-login" id="loginForm">
-        <div class="fmitem">
-            <label class="fmlab">用户名：</label>
-            <div class="fmipt">
-                <input type="text" class="u-ipt" ng-model="user.userName" autofocus="">
-            </div>
+    <div class="fmitem">
+        <label class="fmlab">密码：</label>
+        <div class="fmipt">
+            <input class="u-ipt" type="password" ng-model="password">
         </div>
-        <div class="fmitem">
-            <label class="fmlab">密码：</label>
-            <div class="fmipt">
-                <input class="u-ipt" type="password" ng-model="user.password">
-            </div>
-        </div>
-        <div class="fmitem fmitem-nolab fmitem-btn">
-            <div class="fmipt">
-                <button class="u-btn u-btn-primary u-btn-lg u-btn-block" ng-click="login()">登 录</button>
-            </div>
+    </div>
+    <div class="fmitem fmitem-nolab fmitem-btn">
+        <div class="fmipt">
+            <button class="u-btn u-btn-primary u-btn-lg u-btn-block" ng-click="login()">登 录</button>
         </div>
     </div>
 </div>
