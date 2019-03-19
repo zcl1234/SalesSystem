@@ -1,0 +1,41 @@
+<div class="g-doc">
+    <div class="n-show f-cb" id="showContent">
+        <div class="img"><img
+                src="{{saleContent.imageSrc}}"
+                alt=""></div>
+        <div class="cnt">
+            <h2>{{saleContent.title}}</h2>
+            <p class="summary">{{saleContent.summary}}</p>
+            <div class="price">
+                <span class="v-unit">¥</span><span class="v-value">{{saleContent.price}}</span>
+            </div>
+            <div ng-if="user_role=='SELLER'">
+                <div class="num">已售出：<span class="lessNum"></span><span
+                        class="totalNum">{{saleContent.sellCount}}</span><span
+                        class="moreNum"></span>
+                </div>
+                <div class="oprt f-cb">
+                    <a href="#/public/{{saleContent.id}}" class="u-btn u-btn-primary">编 辑</a>
+                </div>
+            </div>
+            <div ng-if="user_role=='BUYER'">
+                <div class="num">购买数量：<span id="plusNum" class="lessNum"><a href="javascript:;"
+                                                                            style="text-decoration:none"
+                                                                            ng-click="reduceNum()">-</a></span><span
+                        class="totalNum"
+                        id="allNum">{{shoppingCartItem.num}}</span><span
+                        id="addNum" class="moreNum"><a href="javascript:;" style="text-decoration: none"
+                                                       ng-click="addNum()">+</a></span></div>
+                <div class="oprt f-cb">
+                    <button class="u-btn u-btn-primary" ng-click="confirm()">加入购物车</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-tab m-tab-fw m-tab-simple f-cb">
+        <h2>详细信息</h2>
+    </div>
+    <div class="n-detail">
+        {{saleContent.detail}}
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.salessystem.dao.BuyContentDao">
+
+    <resultMap id="BuyContentMap" type="BuyContent">
+        <id property="id" column="id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="buyNum" column="buy_num"/>
+        <association property="saleContent" column="content_id"
+                     select="com.netease.salessystem.dao.SaleContentDao.select"
+                     javaType="SaleContent"/>
+    </resultMap>
+
+    <select id="list" parameterType="Integer" resultMap="BuyContentMap">
+      select
+      id,buyer_id,content_id,buy_num
+      from
+      buy_content
+      where
+      buyer_id=#{buyerId}
+    </select>
+
+    <select id="listContentIds" parameterType="Integer" resultType="Integer">
+      select
+      content_id
+      from
+      buy_content
+      where
+      buyer_id=#{buyerId}
+    </select>
+</mapper>

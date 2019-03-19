@@ -7818,7 +7818,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    *      registered controller} if passed as a string. An empty `noop` function by default.
    *    - `controllerAs` – `{string=}` – identifier name for to reference the controller in the component's scope.
    *      If present, the controller will be published to scope under the `controllerAs` name.
-   *      If not present, this will default to be `$ctrl`.
+   *      If not present, this will default to be `$ctrl.js`.
    *    - `template` – `{string=|function()=}` – html template as a string or a function that
    *      returns an html template as a string which should be used as the contents of this component.
    *      Empty string by default.
@@ -7866,21 +7866,21 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * ```js
    *   var myMod = angular.module(...);
    *   myMod.component('myComp', {
-   *     template: '<div>My name is {{$ctrl.name}}</div>',
+   *     template: '<div>My name is {{$ctrl.js.name}}</div>',
    *     controller: function() {
    *       this.name = 'shahar';
    *     }
    *   });
    *
    *   myMod.component('myComp', {
-   *     template: '<div>My name is {{$ctrl.name}}</div>',
+   *     template: '<div>My name is {{$ctrl.js.name}}</div>',
    *     bindings: {name: '@'}
    *   });
    *
    *   myMod.component('myComp', {
    *     templateUrl: 'views/my-comp.html',
    *     controller: 'MyCtrl',
-   *     controllerAs: 'ctrl',
+   *     controllerAs: 'ctrl.js',
    *     bindings: {name: '@'}
    *   });
    *
@@ -22759,7 +22759,7 @@ var formDirectiveFactory = function(isNgForm) {
     var formDirective = {
       name: 'form',
       restrict: isNgForm ? 'EAC' : 'E',
-      require: ['form', '^^?form'], //first is the form's own ctrl, second is an optional parent form
+      require: ['form', '^^?form'], //first is the form's own ctrl.js, second is an optional parent form
       controller: FormController,
       compile: function ngFormCompile(formElement, attr) {
         // Setup initial state of the control
@@ -24149,7 +24149,7 @@ function createDateInputType(type, regexp, parseDate, format) {
     ctrl.$parsers.push(function(value) {
       if (ctrl.$isEmpty(value)) return null;
       if (regexp.test(value)) {
-        // Note: We cannot read ctrl.$modelValue, as there might be a different
+        // Note: We cannot read ctrl.js.$modelValue, as there might be a different
         // parser/formatter in the processing chain so that the model
         // contains some different data format!
         var parsedDate = parseDate(value, previousDate);
@@ -27502,7 +27502,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
       // If there was no change in validity, don't update the model
       // This prevents changing an invalid modelValue to undefined
       if (!allowInvalid && prevValid !== allValid) {
-        // Note: Don't check ctrl.$valid here, as we could have
+        // Note: Don't check ctrl.js.$valid here, as we could have
         // external validators (e.g. calculated on the server),
         // that just call $setValidity and need the model value
         // to calculate their validity.
@@ -27654,7 +27654,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
       }
     }
     if (isNumber(ctrl.$modelValue) && isNaN(ctrl.$modelValue)) {
-      // ctrl.$modelValue has not been touched yet...
+      // ctrl.js.$modelValue has not been touched yet...
       ctrl.$modelValue = ngModelGet($scope);
     }
     var prevModelValue = ctrl.$modelValue;
@@ -27670,7 +27670,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     // This can happen if e.g. $setViewValue is called from inside a parser
     ctrl.$$runValidators(modelValue, ctrl.$$lastCommittedViewValue, function(allValid) {
       if (!allowInvalid) {
-        // Note: Don't check ctrl.$valid here, as we could have
+        // Note: Don't check ctrl.js.$valid here, as we could have
         // external validators (e.g. calculated on the server),
         // that just call $setValidity and need the model value
         // to calculate their validity.
@@ -28297,7 +28297,7 @@ function addSetValidityMethod(context) {
     }
 
     // re-read the state as the set/unset methods could have
-    // combined state in ctrl.$error[validationError] (used for forms),
+    // combined state in ctrl.js.$error[validationError] (used for forms),
     // where setting/unsetting only increments/decrements the value,
     // and does not replace it.
     var combinedState;

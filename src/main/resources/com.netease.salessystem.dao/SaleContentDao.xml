@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.salessystem.dao.SaleContentDao">
+
+
+    <sql id="selectSql">
+        id,
+        seller_id as sellerId,
+        title,
+        summary,
+        image_src as imageSrc,
+        detail,price,
+        sell_count as sellCount
+    </sql>
+
+    <insert id="insert" parameterType="SaleContent" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        sale_content(seller_id,title,summary,image_src,detail,price)
+        values (#{sellerId},#{title},#{summary},#{imageSrc},#{detail},#{price})
+    </insert>
+
+    <select id="list" resultType="SaleContent">
+        select
+        <include refid="selectSql"/>
+        from
+        sale_content
+    </select>
+
+    <select id="select" parameterType="Integer" resultType="SaleContent">
+        select
+        <include refid="selectSql"/>
+        from
+        sale_content
+        where
+        id=#{id}
+    </select>
+
+    <update id="edit" parameterType="SaleContent">
+        update sale_content
+        <set>
+            <if test="title!=null">
+                title=#{title},
+            </if>
+            <if test="summary!=null">
+                summary=#{summary},
+            </if>
+            <if test="imageSrc!=null">
+                image_src=#{imageSrc},
+            </if>
+            <if test="detail!=null">
+                detail=#{detail},
+            </if>
+            <if test="price!=null">
+                price=#{price}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+</mapper>

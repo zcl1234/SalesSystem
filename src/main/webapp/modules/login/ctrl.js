@@ -6,10 +6,17 @@ angular.module('login', [])
         $scope.login = function () {
             $http.get('/login?username=' + $scope.username + '&password=' + hex_md5($scope.password))
                 .success(function (data) {
-                    $rootScope.username=data.result.userName;
-                    $rootScope.user_role=data.result.userRole;
+                    $rootScope.username = data.result.userName;
+                    $rootScope.user_role = data.result.userRole;
+                    $rootScope.user_id = data.result.id;
+                    // $cookies.username = data.result.userName;
+                    // $cookies.user_role = data.result.userRole;
+                    if (data.result.userRole === 'SELLER') {
+                        $location.path('seller');
+                    } else {
+                        $location.path('buyer');
+                    }
 
-                    $location.path('seller');
                 });
         };
     }]);

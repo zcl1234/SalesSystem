@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="g-doc">
+    <div class="m-tab m-tab-fw m-tab-simple f-cb">
+        <div class="tab">
+            <ul>
+                <li class="z-sel" id="allContent"><a href="javascript:;" ng-click="setCurrent(1)">所有内容</a></li>
+                <li id="unboughtContent"><a href="javascript:;" ng-click="setCurrent(2)">未购买的内容</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="content" class="n-plist">
+        <div id="all" class="tab-pane fade in active" ng-if="current==1">
+            <ul class="f-cb" id="plist">
+                <div ng-repeat="content in content_list">
+                    <li>
+                        <a href="#/detail/{{content.saleContent.id}}" class="link" style="text-decoration: none">
+                            <div class="img"><img src="{{content.saleContent.imageSrc}}"
+                                                  alt="{{content.saleContent.title}}"></div>
+                            <h2>{{content.saleContent.title}}</h2>
+                            <div class="price">
+                                <span class="v-unit">¥</span>
+                                <span class="v-value">{{content.saleContent.price}}</span>
+                            </div>
+                            <span class="had" ng-if="content.buyNum!=0"><b>已购买</b></span>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div id="unbought" class="tab-pane fade in active" ng-if="current==2">
+            <ul class="f-cb" id="plist2">
+                <div ng-repeat="content in unbought_content_list">
+                    <li>
+                        <a href="#/detail/{{content.saleContent.id}}" class="link" style="text-decoration: none">
+                            <div class="img"><img src="{{content.saleContent.imageSrc}}"
+                                                  alt="{{content.saleContent.title}}"></div>
+                            <h2>{{content.saleContent.title}}</h2>
+                            <div class="price">
+                                <span class="v-unit">¥</span>
+                                <span class="v-value">{{content.saleContent.price}}</span>
+                            </div>
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

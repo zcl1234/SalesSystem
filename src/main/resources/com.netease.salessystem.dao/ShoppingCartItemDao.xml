@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.salessystem.dao.ShoppingCartItemDao">
+
+    <resultMap id="shoppingCartItemMap" type="ShoppingCartItem">
+        <id property="id" column="id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="num" column="num"/>
+        <result property="perPrice" column="per_price"/>
+        <association property="saleContent" column="product_id"
+                     select="com.netease.salessystem.dao.SaleContentDao.select"
+                     javaType="SaleContent"/>
+    </resultMap>
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="ShoppingCartItem">
+          insert into
+          shopping_cart_item(id,buyer_id,product_id,num,per_price)
+          values (#{id},#{buyerId},#{saleContent.id},#{num},#{saleContent.price})
+    </insert>
+
+
+    <select id="select" parameterType="Integer" resultMap="shoppingCartItemMap">
+          select
+          id,buyer_id,product_id,num,per_price
+          from
+          shopping_cart_item
+          where
+          product_id=#{productId}
+    </select>
+
+    <select id="list" resultMap="shoppingCartItemMap">
+          select
+          id, buyer_id,product_id,num,per_price
+          from
+          shopping_cart_item
+          where
+          buyer_id=#{buyerId}
+    </select>
+</mapper>
